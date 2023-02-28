@@ -1,7 +1,6 @@
 FROM ruby:2.7
 
 ARG RAILS_ENV
-ARG SECRET_KEY_BASE
 
 # Necessary for bundler to operate properly
 ENV LANG C.UTF-8
@@ -38,6 +37,7 @@ RUN gem update --system
 RUN mkdir /data
 WORKDIR /data
 
+ARG HYRAX_TARGET main
 # Pre-install gems so we aren't reinstalling all the gems when literally any
 # filesystem change happens
 ADD Gemfile /data
@@ -51,3 +51,6 @@ ADD . /data
 
 # install node dependencies, after there are some included
 RUN yarn install
+
+ENTRYPOINT ["/data/bin/container_boot"]
+CMD []

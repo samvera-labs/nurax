@@ -1,5 +1,4 @@
-
-name: Deploy Nurax-dev with Capistrano
+name: Deploy nurax-dev to AWS Elastic Container Service
 on:
   workflow_dispatch:
   repository_dispatch:
@@ -8,17 +7,39 @@ on:
     - cron: '41 10,17 * * 1-5'
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
     env:
-      HYRAX_TARGET: "main"
+      AWS_SDK_LOAD_CONFIG: 1
+      HYRAX_TARGET: main
     steps:
-    - uses: actions/checkout@v2
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.7.6
-        bundler-cache: true
-    - uses: miloserdow/capistrano-deploy@master
-      with:
-        target: nurax-dev
-        deploy_key: ${{ secrets.DEPLOY_ENC_KEY }}
+      - uses: actions/checkout@v2
+      - uses: aws-actions/configure-aws-credentials@master
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+      - run: echo "Building nurax:dev"
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Build, tag, and push image to Amazon ECR
+        uses: docker/build-push-action@v4
+        with:
+          build-args: HYRAX_TARGET=$HYRAX_TARGET RAILS_ENV=production
+          push: true
+          tags: ${{ steps.login-ecr.outputs.registry }}/nurax:dev
+  deploy:
+    needs:
+      - publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: aws-actions/configure-aws-credentials@master
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+      - name: "Force new deployment"
+        run: aws ecs update-service --cluster nurax --service nurax-dev --force-new-deployment
