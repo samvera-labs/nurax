@@ -5,7 +5,8 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/.bundle
+vendor/bundle
+.bundle/config
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -26,3 +27,9 @@
 
 # Ignore Ruby artifacts
 /.ruby-*
+
+.env.development
+
+/config/master.key
+
+/public/assets/*

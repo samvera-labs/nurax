@@ -1,4 +1,4 @@
 ---
 :queues:
-  - default
-  - ingest
+  - <%= [ENV['NURAX_PREFIX'], 'default'].compact.join('-') %>
+  - <%= [ENV['NURAX_PREFIX'], 'ingest'].compact.join('-') %>
