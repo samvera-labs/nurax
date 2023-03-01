@@ -12,8 +12,7 @@ case $command in
     bundle exec sidekiq
     ;;
   init)
-    bundle exec rails db:create db:migrate
-    bundle exec rails hyrax:default_admin_set:create hyrax:default_collection_types:create
+    bundle exec rails db:migrate hyrax:default_admin_set:create hyrax:default_collection_types:create
     ;;
   migrate)
     if bundle exec rails db:migrate:status &> /dev/null; then
