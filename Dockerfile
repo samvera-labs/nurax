@@ -1,4 +1,4 @@
-FROM ruby:2.7
+FROM ruby:2.6
 
 ARG RAILS_ENV
 
@@ -51,6 +51,9 @@ ADD . /data
 
 # install node dependencies, after there are some included
 RUN yarn install
+
+# precopile assets in production
+RUN ./build/build_assets.sh
 
 ENTRYPOINT ["/data/bin/container_boot"]
 CMD []
