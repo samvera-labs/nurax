@@ -7,6 +7,6 @@ test:
   port: <%= ENV['VALKYRIE_SOLR_PORT'] || 8987 %>
   core: <%= ENV['VALKYRIE_SOLR_CORE'] || 'nurax-pg-test' %>
 production:
-  host: <%= ENV['VALKYRIE_SOLR_HOST'] %>
-  port: <%= ENV['VALKYRIE_SOLR_PORT'] %>
-  core: <%= ENV['VALKYRIE_SOLR_CORE'] %>
+  host: <%= ENV['VALKYRIE_SOLR_HOST'] || URI.parse(ENV['SOLR_URL']).host || 'localhost' %>
+  port: <%= ENV['VALKYRIE_SOLR_PORT'] || URI.parse(ENV['SOLR_URL']).port || 8987 %>
+  core: <%= ENV['VALKYRIE_SOLR_CORE'] || URI.parse(ENV['SOLR_URL']).path.sub(/^\/solr\//, '') || 'nurax-pg-prod' %>

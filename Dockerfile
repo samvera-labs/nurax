@@ -1,62 +1,59 @@
-ARG HYRAX_IMAGE_VERSION=3.1.0
-FROM ghcr.io/samvera/hyrax/hyrax-base:$HYRAX_IMAGE_VERSION as build-base
+FROM ruby:2.7
 
-USER root
-RUN apk --no-cache add \
-  bash \
+ARG RAILS_ENV
+
+# Necessary for bundler to operate properly
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
+# add nodejs and yarn dependencies for the frontend
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+# --allow-unauthenticated needed for yarn package
+RUN apt-get update && apt-get upgrade -y && \
+  apt-get install --no-install-recommends -y ca-certificates nodejs yarn \
+  build-essential libpq-dev libreoffice imagemagick unzip ghostscript vim \
   ffmpeg \
-  git \
-  less \
-  mediainfo \
-  openjdk11-jre \
-  perl \
-  postgresql-client && \
-  gem update --system
-USER app
+  clamav-freshclam clamav-daemon libclamav-dev \
+  libqt5webkit5-dev xvfb xauth default-jre-headless --fix-missing --allow-unauthenticated
 
-RUN mkdir -p /app/fits && \
-    cd /app/fits && \
-    wget https://github.com/harvard-lts/fits/releases/download/1.5.1/fits-1.5.1.zip -O fits.zip && \
-    unzip fits.zip && \
-    rm fits.zip && \
-    chmod a+x /app/fits/fits.sh
-ENV PATH="${PATH}:/app/fits"
+# fetch clamav local database
+# initial update of av databases
+RUN freshclam
 
-FROM ghcr.io/samvera/hyrax/hyrax-base:$HYRAX_IMAGE_VERSION as ruby-base
-ARG DOCKERROOT=/app/samvera
+# install FITS for file characterization
+RUN mkdir -p /opt/fits && \
+    curl -fSL -o /opt/fits/fits-1.5.0.zip https://github.com/harvard-lts/fits/releases/download/1.5.0/fits-1.5.0.zip && \
+    cd /opt/fits && unzip fits-1.5.0.zip && chmod +X fits.sh && rm fits-1.5.0.zip
+ENV PATH /opt/fits:$PATH
+
+# Increase stack size limit to help working with large works
+ENV RUBY_THREAD_MACHINE_STACK_SIZE 8388608
 
 RUN gem update --system
 
-USER app
+RUN mkdir /data
+WORKDIR /data
 
-COPY --chown=1001:101 Gemfile* $DOCKERROOT/hyrax-webapp/
+ARG HYRAX_TARGET main
+# Pre-install gems so we aren't reinstalling all the gems when literally any
+# filesystem change happens
+ADD Gemfile /data
+ADD Gemfile.lock /data
+RUN mkdir /data/build
+ADD ./build/install_gems.sh /data/build
+RUN ./build/install_gems.sh
 
-RUN bundle check || bundle install --jobs "$(nproc)"
+# Add the application code
+ADD . /data
 
-COPY --chown=1001:101 scripts/db-migrate-seed.sh $DOCKERROOT/db-migrate-seed.sh
-COPY --chown=1001:101 . $DOCKERROOT/hyrax-webapp
-COPY --chown=1001:101 scripts ${DOCKERROOT}/scripts/
+# install node dependencies, after there are some included
+RUN yarn install
 
-#
-# Rails server
-FROM build-base as nurax-pg
-ARG DOCKERROOT=/app/samvera
+# precopile assets in production
+RUN ./build/build_assets.sh
 
-COPY --from=ruby-base --chown=1001:101 /usr/local/bundle/ /usr/local/bundle/
-COPY --from=ruby-base --chown=1001:101 ${DOCKERROOT} ${DOCKERROOT}
-
-ENTRYPOINT ["/app/samvera/hyrax-webapp/scripts/entrypoint.sh"]
-CMD ["bundle", "exec", "puma"]
-
-#
-# Sidekiq worker
-FROM build-base as nurax-pg-worker
-ARG DOCKERROOT=/app/samvera
-
-ENV MALLOC_ARENA_MAX=2
-
-COPY --from=ruby-base --chown=1001:101 /usr/local/bundle/ /usr/local/bundle/
-COPY --from=ruby-base --chown=1001:101 ${DOCKERROOT} ${DOCKERROOT}
-
-ENTRYPOINT ["/app/samvera/hyrax-webapp/scripts/entrypoint.sh"]
-CMD ["bundle", "exec", "sidekiq"]
+ENTRYPOINT ["/data/bin/container_boot"]
+CMD []

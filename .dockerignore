@@ -1,0 +1,13 @@
+.bundle
+.circleci
+.fcrepo_wrapper*
+.git
+.github
+.solr_wrapper*
+log
+node_modules
+public/assets
+spec
+test
+tmp
+vendor

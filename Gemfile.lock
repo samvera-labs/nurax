@@ -541,11 +541,10 @@ GEM
       rdf-turtle
       rdf-vocab (>= 0.8)
       slop
-    ldpath (1.2.0)
+    ldpath (1.1.0)
       nokogiri (~> 1.8)
       parslet
       rdf (~> 3.0)
-      rdf-vocab (~> 3.0)
     legato (0.7.0)
       multi_json
     link_header (0.0.8)

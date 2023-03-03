@@ -1,0 +1,25 @@
+#!/bin/bash
+
+command=${1:-$CONTAINER_ROLE}
+case $command in
+  console)
+    bundle exec rails console
+    ;;
+  server)
+    bundle exec rails server -b 0.0.0.0
+    ;;
+  sidekiq)
+    bundle exec sidekiq
+    ;;
+  init)
+    bundle exec rails db:migrate hyrax:default_admin_set:create hyrax:default_collection_types:create
+    ;;
+  migrate)
+    if bundle exec rails db:migrate:status &> /dev/null; then
+      bundle exec rails db:migrate
+    fi
+    ;;
+  *)
+    echo "Command unknown: $command"
+    exit 1
+esac
