@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       AWS_SDK_LOAD_CONFIG: 1
-      HYRAX_TARGET: ${{ github.event.client_payload.sha }}
+      HYRAX_TARGET: ${{ github.event.client_payload.ref }}
     steps:
       - uses: actions/checkout@v2
         with:
