@@ -36,11 +36,6 @@ Hyrax.config do |config|
   #   maxFileSize: 500.megabytes
   # }
 
-  # Enable displaying usage statistics in the UI
-  # Defaults to false
-  # Requires a Google Analytics id and OAuth2 keyfile.  See README for more info
-  config.analytics = true
-
   # Date you wish to start collecting Google Analytic statistics for
   # Leaving it blank will set the start date to when ever the file was uploaded by
   # NOTE: if you have always sent analytics to GA for downloads and page views leave this commented out
