@@ -5,4 +5,4 @@ if [ "${RAILS_ENV}" = 'production' ] || [ "${RAILS_ENV}" = 'staging' ]; then
   bundle config --local without development test
 fi
 
-bundle install 
+bundle install && bundle update --conservative hyrax 

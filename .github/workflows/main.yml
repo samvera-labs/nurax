@@ -16,7 +16,7 @@ jobs:
       contents: read
     env:
       AWS_REGION: us-east-2
-      HYRAX_TARGET: ${{ github.event.inputs.hyraxTarget || github.event.client_payload.sha }}
+      HYRAX_TARGET: ${{ github.event.inputs.hyraxTarget || github.event.client_payload.ref }}
     steps:
       - uses: actions/checkout@v3
       - uses: aws-actions/configure-aws-credentials@master
