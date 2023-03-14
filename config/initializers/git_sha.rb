@@ -1,15 +1,24 @@
+deploy_info = {
+  "sha" => "Unknown SHA",
+  "branch" => "Unknown branch",
+  "last_deployed" => "Not in deployed environment"
+}
+if File.exist?('deploy_info.json')
+  deploy_info.merge!(JSON.parse(File.read('deploy_info.json')))
+end
+
 GIT_SHA =
-    if Rails.env.production? && File.exist?('/opt/nurax/revisions.log')
-      `tail -1 /opt/nurax/revisions.log`.chomp.split(" ")[3].gsub(/\)$/, '')
+    if Rails.env.production?
+      deploy_info["sha"]
     elsif Rails.env.development? || Rails.env.test?
       `git rev-parse HEAD`.chomp
     else
       "Unknown SHA"
     end
-
+    
 BRANCH =
-    if Rails.env.production? && File.exist?('/opt/nurax/revisions.log')
-      `tail -1 /opt/nurax/revisions.log`.chomp.split(" ")[1]
+    if Rails.env.production?
+      deploy_info["branch"]
     elsif Rails.env.development? || Rails.env.test?
       `git rev-parse --abbrev-ref HEAD`.chomp
     else
@@ -17,9 +26,8 @@ BRANCH =
     end
 
 LAST_DEPLOYED =
-    if Rails.env.production? && File.exist?('/opt/nurax/revisions.log')
-      deployed = `tail -1 /opt/nurax/revisions.log`.chomp.split(" ")[7]
-      DateTime.parse(deployed).strftime("%e %b %Y %H:%M:%S")
+    if Rails.env.production?
+      DateTime.parse(deploy_info["last_deployed"]).strftime("%e %b %Y %H:%M:%S")
     else
       "Not in deployed environment"
     end
