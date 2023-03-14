@@ -69,7 +69,7 @@ end
 #gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # gem 'hyrax', github: 'samvera/hyrax', branch: 'master'
-gem 'hyrax', github: 'samvera/hyrax', branch: ENV['HYRAX_TARGET'] || 'main'
+gem 'hyrax', github: 'samvera/hyrax', ref: ENV['HYRAX_TARGET'] || 'main'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-guests', '~> 0.6'
