@@ -39,6 +39,7 @@ jobs:
             "RAILS_ENV=production"
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          context: .
           push: true
           tags: ${{ steps.login-ecr.outputs.registry }}/nurax:pg
       - name: "Force new deployment"

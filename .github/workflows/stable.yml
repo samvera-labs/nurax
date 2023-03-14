@@ -40,6 +40,7 @@ jobs:
            "SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}"
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          context: .
           push: true
           tags: ${{ steps.login-ecr.outputs.registry }}/nurax:stable
       - name: "Force new deployment"
