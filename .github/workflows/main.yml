@@ -1,6 +1,11 @@
 name: Deploy nurax-dev to AWS Elastic Container Service
 on:
   workflow_dispatch:
+    inputs:
+      hyraxTarget:
+        description: Hyrax ref to use
+        required: true
+        default: main
   repository_dispatch:
     types: [push]
 jobs:
@@ -11,7 +16,7 @@ jobs:
       contents: read
     env:
       AWS_REGION: us-east-2
-      HYRAX_TARGET: main
+      HYRAX_TARGET: ${{ github.event.inputs.hyraxTarget || github.event.client_payload.sha }}
     steps:
       - uses: actions/checkout@v3
       - uses: aws-actions/configure-aws-credentials@master
