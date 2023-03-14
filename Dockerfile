@@ -38,6 +38,7 @@ RUN mkdir /data
 WORKDIR /data
 
 ARG HYRAX_TARGET main
+
 # Pre-install gems so we aren't reinstalling all the gems when literally any
 # filesystem change happens
 ADD Gemfile /data
@@ -47,12 +48,14 @@ ADD ./build/install_gems.sh /data/build
 RUN ./build/install_gems.sh
 
 # Add the application code
+RUN mv Gemfile.lock Gemfile.lock.build
 ADD . /data
+RUN mv Gemfile.lock.build Gemfile.lock
 
 # install node dependencies, after there are some included
 RUN yarn install
 
-# precopile assets in production
+# precompile assets in production
 RUN ./build/build_assets.sh
 
 ENTRYPOINT ["/data/bin/container_boot"]
