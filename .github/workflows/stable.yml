@@ -4,7 +4,7 @@ on:
   repository_dispatch:
     types: [release]
 jobs:
-  publish:
+  build_and_deploy:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -19,7 +19,7 @@ jobs:
       - uses: aws-actions/configure-aws-credentials@master
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AwsAccount }}:role/GitHubOIDCRole
-          aws-region: us-east-2
+          aws-region: ${{ env.AWS_REGION }}
       - run: echo "Building nurax:stable"
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
@@ -35,15 +35,5 @@ jobs:
            "SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}"
           push: true
           tags: ${{ steps.login-ecr.outputs.registry }}/nurax:stable
-  deploy:
-    needs:
-      - publish
-    runs-on: ubuntu-latest
-    steps:
-      - uses: aws-actions/configure-aws-credentials@master
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
       - name: "Force new deployment"
         run: aws ecs update-service --cluster nurax --service nurax-stable --force-new-deployment
