@@ -29,7 +29,10 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         uses: docker/build-push-action@v4
         with:
-          build-args: HYRAX_TARGET=${{ env.HYRAX_TARGET }} RAILS_ENV=production SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}
+          build-args: |
+           "HYRAX_TARGET=${{ env.HYRAX_TARGET }}"
+           "RAILS_ENV=production"
+           "SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }}"
           push: true
           tags: ${{ steps.login-ecr.outputs.registry }}/nurax:stable
   deploy:
