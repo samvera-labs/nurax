@@ -47,7 +47,9 @@ ADD ./build/install_gems.sh /data/build
 RUN ./build/install_gems.sh
 
 # Add the application code
+RUN mv Gemfile.lock Gemfile.lock.build
 ADD . /data
+RUN mv Gemfile.lock.build Gemfile.lock
 
 # install node dependencies, after there are some included
 RUN yarn install
