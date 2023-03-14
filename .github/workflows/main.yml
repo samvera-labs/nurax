@@ -35,6 +35,8 @@ jobs:
           build-args: |
             "HYRAX_TARGET=${{ env.HYRAX_TARGET }}"
             "RAILS_ENV=production"
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           push: true
           tags: ${{ steps.login-ecr.outputs.registry }}/nurax:dev
       - name: "Force new deployment"
