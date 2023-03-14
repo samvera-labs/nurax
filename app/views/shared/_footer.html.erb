@@ -13,7 +13,7 @@
               else
                 HYRAX_VERSION
               end %>
-        <br><%= "Hyrax Branch: #{HYRAX_BRANCH}" if HYRAX_BRANCH.present? %>
+        <br><%= "Hyrax Release: #{HYRAX_BRANCH}" if HYRAX_BRANCH.present? %>
         <br><%= "Hyrax Revision: " if HYRAX_BRANCH_REVISION.present? %>
           <%= if HYRAX_BRANCH_REVISION.present? && HYRAX_BRANCH_REVISION != 'Unknown'
                 link_to(HYRAX_BRANCH_REVISION,
