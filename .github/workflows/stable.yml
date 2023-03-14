@@ -6,6 +6,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     env:
       AWS_REGION: us-east-2
       HYRAX_TARGET: ${{ github.event.client_payload.sha }}
