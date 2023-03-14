@@ -29,6 +29,16 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+      - name: Save git ref info for runtime display
+        run: |
+          cat <<__EOC__ > deploy_info.json
+          { 
+            "branch": "$(git rev-parse --abbrev-ref HEAD)",
+            "sha": "$(git rev-parse HEAD)",
+            "last_deployed": "$(date -Iseconds)"
+          }
+          __EOC__
+          cat deploy_info.json
       - name: Build, tag, and push image to Amazon ECR
         uses: docker/build-push-action@v4
         with:
