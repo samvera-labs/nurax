@@ -17,6 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
   build-essential libpq-dev libreoffice imagemagick unzip ghostscript vim \
   ffmpeg \
   clamav-freshclam clamav-daemon libclamav-dev \
+  libjemalloc2 \
   libqt5webkit5-dev xvfb xauth default-jre-headless --fix-missing --allow-unauthenticated
 
 # fetch clamav local database
@@ -31,6 +32,8 @@ ENV PATH /opt/fits:$PATH
 
 # Increase stack size limit to help working with large works
 ENV RUBY_THREAD_MACHINE_STACK_SIZE 8388608
+ENV RUBY_THREAD_VM_STACK_SIZE 8388608
+ENV LD_PRELOAD /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
 
 RUN gem update --system
 
