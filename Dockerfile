@@ -37,7 +37,7 @@ RUN gem update --system
 RUN mkdir /data
 WORKDIR /data
 
-ARG HYRAX_TARGET main
+ARG HYRAX_TARGET=main
 ENV HYRAX_TARGET=$HYRAX_TARGET
 
 # Pre-install gems so we aren't reinstalling all the gems when literally any
