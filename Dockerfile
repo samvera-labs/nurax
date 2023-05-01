@@ -1,4 +1,4 @@
-FROM ruby:2.7
+FROM ruby:3.2-bullseye
 
 ARG RAILS_ENV
 
@@ -17,6 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
   build-essential libpq-dev libreoffice imagemagick unzip ghostscript vim \
   ffmpeg \
   clamav-freshclam clamav-daemon libclamav-dev \
+  libjemalloc2 \
   libqt5webkit5-dev xvfb xauth default-jre-headless --fix-missing --allow-unauthenticated
 
 # fetch clamav local database
@@ -25,19 +26,22 @@ RUN freshclam
 
 # install FITS for file characterization
 RUN mkdir -p /opt/fits && \
-    curl -fSL -o /opt/fits/fits-1.5.0.zip https://github.com/harvard-lts/fits/releases/download/1.5.0/fits-1.5.0.zip && \
-    cd /opt/fits && unzip fits-1.5.0.zip && chmod +X fits.sh && rm fits-1.5.0.zip
+    curl -fSL -o /opt/fits/fits-1.6.0.zip https://github.com/harvard-lts/fits/releases/download/1.6.0/fits-1.6.0.zip && \
+    cd /opt/fits && unzip fits-1.6.0.zip && chmod +X fits.sh && rm fits-1.6.0.zip && \
+    sed -i 's/\(<tool.*TikaTool.*>\)/<!--\1-->/' xml/fits.xml
 ENV PATH /opt/fits:$PATH
 
 # Increase stack size limit to help working with large works
 ENV RUBY_THREAD_MACHINE_STACK_SIZE 8388608
+ENV RUBY_THREAD_VM_STACK_SIZE 8388608
+ENV LD_PRELOAD /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
 
 RUN gem update --system
 
 RUN mkdir /data
 WORKDIR /data
 
-ARG HYRAX_TARGET main
+ARG HYRAX_TARGET=main
 ENV HYRAX_TARGET=$HYRAX_TARGET
 
 # Pre-install gems so we aren't reinstalling all the gems when literally any
