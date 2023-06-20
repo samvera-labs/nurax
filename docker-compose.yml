@@ -4,7 +4,9 @@ services:
   web:
     build:
       context: .
-      target: nurax-pg
+      args:
+        HYRAX_TARGET: main
+    command: server
     image: nurax-pg
     stdin_open: true
     tty: true
@@ -33,7 +35,9 @@ services:
   sidekiq:
     build:
       context: .
-      target: nurax-pg-worker
+      args:
+        HYRAX_TARGET: main
+    command: sidekiq
     image: nurax-pg-worker
     restart: always
     user: root
