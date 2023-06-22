@@ -14,6 +14,9 @@ case $command in
   init)
     bundle exec rails db:migrate hyrax:default_admin_set:create hyrax:default_collection_types:create
     ;;
+  sh)
+    sh
+    ;;
   migrate)
     if bundle exec rails db:migrate:status &> /dev/null; then
       bundle exec rails db:migrate
