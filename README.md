@@ -5,6 +5,34 @@ using Postgres as the metadata store for objects.  In this application, Fedora i
 not used for storing object metadata or files. The Hyrax gem is pinned to the
 `main` branch to ensure it has the latest possible code for testing.
 
+## Running [pg] Nurax with Docker
+### Build the base application container
+**Important:** Rebuilding the docker container is required your first time using the app and whenever Gemfile or Dockerfile updates are made.
+
+``` bash
+docker compose build
+# OR you can use the below if you only made Gemfile/Gemfile.lock changes
+docker compose build web
+```
+
+### Development workflow
+#### Start the development server
+``` bash
+# Starts all containers and allows you to view the logs
+docker compose up
+```
+
+#### Bash into the web container
+``` bash
+docker compose run web sh
+```
+
+#### Run seeds
+``` bash
+docker compose run web sh
+rails db:seed
+```
+
 ## Known Issues
 
 Collection model
