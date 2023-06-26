@@ -15,7 +15,7 @@ services:
     env_file:
       - .env.docker
     environment:
-      - RAILS_ROOT=/app/samvera/hyrax-webapp
+      - RAILS_ROOT=/data
     depends_on:
       - chrome
       - db_migrate
@@ -25,10 +25,10 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - .:/app/samvera/hyrax-webapp:cached
-      - hyrax-derivatives:/app/samvera/hyrax-webapp/derivatives
-      - hyrax-uploads:/app/samvera/hyrax-webapp/uploads
-      - rails-public:/app/samvera/hyrax-webapp/public
+      - .:/data:cached
+      - hyrax-derivatives:/data/derivatives
+      - hyrax-uploads:/data/uploads
+      - rails-public:/data/public
     networks:
       - nurax-pg
 
@@ -49,11 +49,11 @@ services:
       - redis
       - solr
     volumes:
-      - .:/app/samvera/hyrax-webapp:cached
-      - hyrax-derivatives:/app/samvera/hyrax-webapp/derivatives
-      - hyrax-uploads:/app/samvera/hyrax-webapp/uploads
-      - sidekiq-public:/app/samvera/hyrax-webapp/public
-      - sidekiq-tmp:/app/samvera/hyrax-webapp/tmp
+      - .:/data:cached
+      - hyrax-derivatives:/data/derivatives
+      - hyrax-uploads:/data/uploads
+      - sidekiq-public:/data/public
+      - sidekiq-tmp:/data/tmp
     networks:
       - nurax-pg
 
@@ -87,9 +87,9 @@ services:
       - postgres
       - solr
     volumes:
-      - .:/app/samvera/hyrax-webapp:cached
-      - rails-public:/app/samvera/hyrax-webapp/public
-      - rails-tmp:/app/samvera/hyrax-webapp/tmp
+      - .:/data:cached
+      - rails-public:/data/public
+      - rails-tmp:/data/tmp
     networks:
       - nurax-pg
 
