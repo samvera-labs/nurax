@@ -1,95 +1,99 @@
 development:
   admin:
-    - mjgiarlo@stanford.edu
-    - jrudder@email.unc.edu
-    - steve.vantuyl@oregonstate.edu
-    - chris-diaz@northwestern.edu
-    - shlake@virginia.edu
-    - hparekh@nd.edu
-    - gamontoya@ucsd.edu
-    - rkati@email.unc.edu
-    - jrc88@cornell.edu
-    - elr37@cornell.edu
-    - mark@curationexperts.com
-    - cjcolvar@indiana.edu
-    - brian.mcbride@utah.edu
-    - kmusio@artic.edu
-    - johannes.frenzel@rub.de
-    - eporter@emory.edu
-    - naw4t@virginia.edu
-    - saidulla@iu.edu
     - adam.arling@northwestern.edu
-    - moira.downey@duke.edu
-    - nikdragovic@gmail.com
-    - lrobins5@nd.edu
-    - kallen2@library.ucla.edu
-    - rgjoshe@csufresno.edu
-    - mutugi.gathuri@gmail.com
-    - karen.didrickson@northwestern.edu
-    - morganem@email.unc.edu
-    - ebrassel@email.unc.edu
-    - sarah.imholt@oregonstate.edu
-    - scherztc@ucmail.uc.edu
-    - tao.zhao.lib@gmail.com
-    - dwithana@iu.edu
-    - mat@northwestern.edu
+    - alisha@scientist.com
     - ayoub.belemlih@emory.edu
     - brad.watson.orlando@gmail.com
-    - edj00004@mix.wvu.edu
+    - brian.mcbride@utah.edu
+    - chris-diaz@northwestern.edu
+    - cjcolvar@indiana.edu
     - dlpierce@indiana.edu
+    - dwithana@iu.edu
+    - ebrassel@email.unc.edu
+    - edj00004@mix.wvu.edu
+    - elr37@cornell.edu
+    - eporter@emory.edu
+    - gamontoya@ucsd.edu
+    - hparekh@nd.edu
+    - johannes.frenzel@rub.de
+    - jrc88@cornell.edu
+    - jrudder@email.unc.edu
+    - kallen2@library.ucla.edu
+    - karen.didrickson@northwestern.edu
+    - kmusio@artic.edu
+    - lrobins5@nd.edu
+    - mark@curationexperts.com
+    - mat@northwestern.edu
+    - mjgiarlo@stanford.edu
+    - moira.downey@duke.edu
+    - morganem@email.unc.edu
+    - mutugi.gathuri@gmail.com
+    - naw4t@virginia.edu
+    - nikdragovic@gmail.com
+    - rgjoshe@csufresno.edu
+    - rkati@email.unc.edu
+    - saidulla@iu.edu
+    - sarah.imholt@oregonstate.edu
+    - scherztc@ucmail.uc.edu
+    - shlake@virginia.edu
+    - softserv@scientist.com
+    - steve.vantuyl@oregonstate.edu
+    - tao.zhao.lib@gmail.com
 production:
   admin:
-    - mjgiarlo@stanford.edu
-    - jrudder@email.unc.edu
-    - steve.vantuyl@oregonstate.edu
-    - chris-diaz@northwestern.edu
-    - shlake@virginia.edu
-    - hparekh@nd.edu
-    - gamontoya@ucsd.edu
-    - rkati@email.unc.edu
-    - jrc88@cornell.edu
-    - elr37@cornell.edu
-    - mark@curationexperts.com
-    - cjcolvar@indiana.edu
-    - brian.mcbride@utah.edu
-    - kmusio@artic.edu
-    - johannes.frenzel@rub.de
-    - eporter@emory.edu
-    - naw4t@virginia.edu
-    - saidulla@iu.edu
     - adam.arling@northwestern.edu
-    - moira.downey@duke.edu
-    - nikdragovic@gmail.com
-    - lrobins5@nd.edu
-    - kallen2@library.ucla.edu
-    - mcwhitak@iu.edu
-    - rgjoshe@csufresno.edu
-    - mutugi.gathuri@gmail.com
-    - karen.didrickson@northwestern.edu
-    - morganem@email.unc.edu
-    - ebrassel@email.unc.edu
-    - sarah.imholt@oregonstate.edu
-    - jlhardes@iu.edu
-    - kelly@notch8.com
-    - jp@notch8.com
-    - shana@notch8.com
-    - phil.suda@wustl.edu
-    - njaffer@umich.edu
-    - mbagget1@utk.edu
-    - hannah.frost@gmail.com
+    - alisha@scientist.com
     - amyhodge@stanford.edu
     - astridu@stanford.edu
-    - scherztc@ucmail.uc.edu
-    - crissmeyer@ucsb.edu
-    - gjanee@ucsb.edu
-    - tao.zhao.lib@gmail.com
-    - rachel@curationexperts.com
-    - dwithana@iu.edu
-    - mat@northwestern.edu
     - ayoub.belemlih@emory.edu
     - brad.watson.orlando@gmail.com
-    - edj00004@mix.wvu.edu
+    - brian.mcbride@utah.edu
+    - chris-diaz@northwestern.edu
+    - cjcolvar@indiana.edu
+    - crissmeyer@ucsb.edu
     - dlpierce@indiana.edu
+    - dwithana@iu.edu
+    - ebrassel@email.unc.edu
+    - edj00004@mix.wvu.edu
+    - elr37@cornell.edu
+    - eporter@emory.edu
+    - gamontoya@ucsd.edu
+    - gjanee@ucsb.edu
+    - hannah.frost@gmail.com
+    - hparekh@nd.edu
+    - jlhardes@iu.edu
+    - johannes.frenzel@rub.de
+    - jp@notch8.com
+    - jrc88@cornell.edu
+    - jrudder@email.unc.edu
+    - kallen2@library.ucla.edu
+    - karen.didrickson@northwestern.edu
+    - kelly@notch8.com
+    - kmusio@artic.edu
+    - lrobins5@nd.edu
+    - mark@curationexperts.com
+    - mat@northwestern.edu
+    - mbagget1@utk.edu
+    - mcwhitak@iu.edu
+    - mjgiarlo@stanford.edu
+    - moira.downey@duke.edu
+    - morganem@email.unc.edu
+    - mutugi.gathuri@gmail.com
+    - naw4t@virginia.edu
+    - nikdragovic@gmail.com
+    - njaffer@umich.edu
+    - phil.suda@wustl.edu
+    - rachel@curationexperts.com
+    - rgjoshe@csufresno.edu
+    - rkati@email.unc.edu
+    - saidulla@iu.edu
+    - sarah.imholt@oregonstate.edu
+    - scherztc@ucmail.uc.edu
+    - shana@notch8.com
+    - shlake@virginia.edu
+    - softserv@scientist.com
+    - steve.vantuyl@oregonstate.edu
+    - tao.zhao.lib@gmail.com
 test:
   archivist:
     - archivist1@example.com
@@ -104,5 +108,5 @@ test:
     - archivist1@example.com
     - researcher1@example.com
   patron:
-    - patron1@example.com
     - leland_himself@example.com
+    - patron1@example.com
