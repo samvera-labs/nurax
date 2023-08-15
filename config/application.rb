@@ -16,6 +16,9 @@ module NuraxPg
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    # use SideKiq by default
+    config.active_job.queue_adapter = :sidekiq
+
     if ENV["RAILS_LOG_TO_STDOUT"]
       logger = ActiveSupport::Logger.new($stdout)
       logger.formatter = config.log_formatter

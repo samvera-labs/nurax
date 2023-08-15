@@ -1,4 +1,7 @@
 #!/bin/bash
+set -x
+
+bundle install
 
 command=${1:-$CONTAINER_ROLE}
 case $command in
@@ -6,16 +9,17 @@ case $command in
     bundle exec rails console
     ;;
   server)
-    bundle exec rails server -b 0.0.0.0
+    exec bundle exec rails server -b 0.0.0.0 "${@:2}"
     ;;
   sidekiq)
-    bundle exec sidekiq
+    exec bundle exec sidekiq "${@:2}"
     ;;
   init)
-    bundle exec rails db:migrate hyrax:default_admin_set:create hyrax:default_collection_types:create
+    bundle exec rails db:migrate
+    bundle exec rails hyrax:default_admin_set:create hyrax:default_collection_types:create
     ;;
   sh)
-    sh
+    sh "${@:2}"
     ;;
   migrate)
     if bundle exec rails db:migrate:status &> /dev/null; then
