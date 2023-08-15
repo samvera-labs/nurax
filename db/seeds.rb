@@ -2,7 +2,7 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
 
-Hyrax::AdminSetCreateService.find_or_create_default_admin_set.id
+Hyrax::AdminSetCreateService.find_or_create_default_admin_set
 
 admin_role = Role.find_or_create_by(name: 'admin')
 admin = User.find_by(email: 'admin@localhost') ||

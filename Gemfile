@@ -7,39 +7,30 @@ gem 'bcrypt_pbkdf'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.0'
 gem 'coffee-rails', '~> 4.2'
-gem 'devise', '4.8.0'
+gem 'devise'
 gem 'devise-guests', '0.8.1'
 gem 'dotenv-rails'
 gem 'ed25519'
-gem 'honeybadger', '~> 4.0'
 gem 'hydra-role-management'
 gem 'hyrax', github: 'samvera/hyrax', ref: ENV.fetch('HYRAX_TARGET', 'main')
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
-gem 'pg', '1.2.3'
-gem 'puma', '~> 5.5.2'
+gem 'okcomputer'
+gem 'pg'
+gem 'puma'
 gem 'rails', '~> 6.1'
 gem 'riiif', '~> 2.1'
 gem 'rsolr', '>= 1.0', '< 3'
 gem 'sass-rails', '~> 6.0'
-gem 'sidekiq', '~> 6.4'
+gem 'sidekiq', '~> 7.1'
 gem 'turbolinks', '~> 5'
 gem 'twitter-typeahead-rails', '0.11.1.pre.corejavascript'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'uglifier', '>= 1.3.0'
-# gem 'valkyrie', '~> 2', '>= 2.1.1'
 
 group :development do
   gem 'better_errors' # add command line in browser when errors
   gem 'binding_of_caller' # deeper stack trace used by better errors
-
-  # Use Capistrano for deployment automation
-  gem 'capistrano', '~> 3.16', require: false
-  gem 'capistrano-bundler', '~> 2.0'
-  gem 'capistrano-ext'
-  gem 'capistrano-passenger'
-  gem 'capistrano-rails'
-  gem 'capistrano-sidekiq', '~> 1.0', '< 2.0'
 
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
