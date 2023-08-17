@@ -47,7 +47,7 @@ Valkyrie.config.metadata_adapter = :nurax_pg_metadata_adapter
 #
 # Valkyrie.config.storage_adapter = :repository_s3
 Valkyrie::StorageAdapter.register(
-  Valkyrie::Storage::Disk.new(base_path: Rails.root.join("public", "files")),
+  Valkyrie::Storage::Disk.new(base_path: ENV.fetch('STORAGE_PATH') { Rails.root.join("public", "files") }),
   :disk
 )
 Valkyrie.config.storage_adapter  = :disk
