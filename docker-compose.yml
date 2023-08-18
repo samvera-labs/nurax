@@ -36,13 +36,13 @@ services:
   dev: &dev
     <<: *app
     environment:
-      - CACHE_PATH=/data/tmp/uploads/cache
+      - HYRAX_CACHE_PATH=/data/tmp/uploads/cache
       - DB_NAME=development
       - DB_HOST=db-dev
       - DB_PASSWORD=postgres
       - DB_PORT='5432'
       - DB_USERNAME=postgres
-      - DERIVATIVES_PATH=/data/tmp/derivatives
+      - HYRAX_DERIVATIVES_PATH=/data/tmp/derivatives
       - FEDORA_URL=http://fcrepo-dev:8080/fcrepo/rest
       - FITS_PATH=/opt/fits-1.0.5/fits.sh
       - RAILS_ENV=development
@@ -51,7 +51,7 @@ services:
       - REDIS_PORT='6379'
       - SECRET_KEY_BASE=bobross
       - SOLR_URL=http://solr-dev:8983/solr/development
-      - UPLOADS_PATH=/data/tmp/uploads
+      - HYRAX_UPLOADS_PATH=/data/tmp/uploads
     depends_on:
       - db-dev
       - solr-dev
@@ -81,13 +81,13 @@ services:
   test: &test
     <<: *app
     environment:
-      - CACHE_PATH=/data/tmp/uploads/cache
+      - HYRAX_CACHE_PATH=/data/tmp/uploads/cache
       - DB_NAME=test
       - DB_HOST=db-dev
       - DB_PASSWORD=postgres
       - DB_PORT='5432'
       - DB_USERNAME=postgres
-      - DERIVATIVES_PATH=/data/tmp/derivatives
+      - HYRAX_DERIVATIVES_PATH=/data/tmp/derivatives
       - FEDORA_URL=http://fcrepo-test:8080/fcrepo/rest
       - FITS_PATH=/opt/fits-1.0.5/fits.sh
       - RAILS_ENV=test
@@ -95,7 +95,7 @@ services:
       - REDIS_PORT='6379'
       - SECRET_KEY_BASE=bobross
       - SOLR_URL=http://solr-test:8983/solr/test
-      - UPLOADS_PATH=/data/tmp/uploads
+      - HYRAX_UPLOADS_PATH=/data/tmp/uploads
     depends_on:
       - db-test
       - solr-test
