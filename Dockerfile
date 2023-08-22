@@ -27,7 +27,8 @@ RUN mkdir -p /opt/fits && \
     curl -fSL -o /opt/fits/fits-1.6.0.zip https://github.com/harvard-lts/fits/releases/download/1.6.0/fits-1.6.0.zip && \
     cd /opt/fits && unzip fits-1.6.0.zip && chmod +X fits.sh && \
     rm fits-1.6.0.zip tools/mediainfo/linux/libmediainfo.so.0 tools/mediainfo/linux/libzen.so.0 && \
-    sed -i 's/\(<tool.*TikaTool.*>\)/<!--\1-->/ ; s/\(<tool.*FFIdent.*>\)/<!--\1-->/' xml/fits.xml
+    sed -i 's/\(<tool.*TikaTool.*>\)/<!--\1-->/ ; s/\(<tool.*FFIdent.*>\)/<!--\1-->/' xml/fits.xml && \
+    cd /etc/ImageMagick-6 ; sed -i 's/\(<policy.*none.*PDF.*>\)/<!--\1-->/' policy.xml
 
 # Increase stack size limit to help working with large works
 ENV PATH=/opt/fits:$PATH \
