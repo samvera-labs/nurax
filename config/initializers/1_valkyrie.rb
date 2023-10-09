@@ -46,11 +46,16 @@ Valkyrie.config.metadata_adapter = :nurax_pg_metadata_adapter
 # )
 #
 # Valkyrie.config.storage_adapter = :repository_s3
+# Valkyrie::StorageAdapter.register(
+#   Valkyrie::Storage::Disk.new(base_path: ENV.fetch('HYRAX_STORAGE_PATH') { Rails.root.join("storage", "files") },
+#                               file_mover: FileUtils.method(:cp)),
+#   :disk
+# )
 Valkyrie::StorageAdapter.register(
-  Valkyrie::Storage::Disk.new(base_path: ENV.fetch('HYRAX_STORAGE_PATH') { Rails.root.join("storage", "files") },
-                              file_mover: FileUtils.method(:cp)),
-  :disk
+  Valkyrie::Storage::VersionedDisk.new(base_path: ENV.fetch('HYRAX_STORAGE_PATH') { Rails.root.join("storage", "versioned_files") },
+                                       file_mover: FileUtils.method(:cp)),
+  :versioned_disk
 )
-Valkyrie.config.storage_adapter  = :disk
+Valkyrie.config.storage_adapter  = :versioned_disk
 
 Valkyrie.config.indexing_adapter = :solr_index
