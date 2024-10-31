@@ -2,6 +2,7 @@ development:
   admin:
     - adam.arling@northwestern.edu
     - alisha@scientist.com
+    - amanda@palni.edu
     - ayoub.belemlih@emory.edu
     - brad.watson.orlando@gmail.com
     - brian.mcbride@utah.edu
@@ -29,7 +30,9 @@ development:
     - morganem@email.unc.edu
     - mutugi.gathuri@gmail.com
     - naw4t@virginia.edu
+    - nicholas.homenda@tufts.edu
     - nikdragovic@gmail.com
+    - randy.kuehn@louisville.edu
     - rgjoshe@csufresno.edu
     - rkati@email.unc.edu
     - saidulla@iu.edu
@@ -43,6 +46,7 @@ production:
   admin:
     - adam.arling@northwestern.edu
     - alisha@scientist.com
+    - amanda@palni.edu
     - amyhodge@stanford.edu
     - astridu@stanford.edu
     - ayoub.belemlih@emory.edu
@@ -80,10 +84,12 @@ production:
     - morganem@email.unc.edu
     - mutugi.gathuri@gmail.com
     - naw4t@virginia.edu
+    - nicholas.homenda@tufts.edu
     - nikdragovic@gmail.com
     - njaffer@umich.edu
     - phil.suda@wustl.edu
     - rachel@curationexperts.com
+    - randy.kuehn@louisville.edu
     - rgjoshe@csufresno.edu
     - rkati@email.unc.edu
     - saidulla@iu.edu
