@@ -66,6 +66,7 @@ end
 
 gem 'hyrax', github: 'samvera/hyrax', ref: ENV['HYRAX_TARGET'] || 'main'
 # gem 'hyrax', '2.1.0'
+gem 'activerecord-nulldb-adapter', '~> 1.1'
 gem 'bootstrap', '~> 4.0'
 gem 'devise'
 gem 'devise-i18n'
