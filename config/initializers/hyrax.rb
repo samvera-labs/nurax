@@ -236,6 +236,10 @@ Hyrax.config do |config|
   rescue Errno::ENOENT
     config.browse_everything = nil
   end
+
+  config.collection_model = '::Collection'
+  config.admin_set_model = 'AdminSet'
+  config.file_set_model = '::FileSet'
 end
 
 Date::DATE_FORMATS[:standard] = "%m/%d/%Y"
