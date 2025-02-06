@@ -51,7 +51,7 @@ services:
       - REDIS_PORT='6379'
       - SECRET_KEY_BASE=bobross
       - SOLR_URL=http://solr-dev:8983/solr/development
-      - HYRAX_UPLOADS_PATH=/data/tmp/uploads
+      - HYRAX_UPLOAD_PATH=/data/tmp/uploads
     depends_on:
       - db-dev
       - solr-dev
@@ -95,7 +95,7 @@ services:
       - REDIS_PORT='6379'
       - SECRET_KEY_BASE=bobross
       - SOLR_URL=http://solr-test:8983/solr/test
-      - HYRAX_UPLOADS_PATH=/data/tmp/uploads
+      - HYRAX_UPLOAD_PATH=/data/tmp/uploads
     depends_on:
       - db-test
       - solr-test
