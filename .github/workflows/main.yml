@@ -6,8 +6,8 @@ on:
         description: Hyrax ref to use
         required: true
         default: main
-  repository_dispatch:
-    types: [push]
+#  repository_dispatch:
+#    types: [push]
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
